@@ -28,10 +28,19 @@
 <body>
   <Div Align="center"><h1>星座一覧</h1></Div>
   <hr>
-  <?php
-  for($count = 0; $count < 88; $count++) {?>
-    <a href="http://localhost/seiza/detail_star_result.php"><?print $result["result"][$count]["jpName"];
+  <h3>
+  <table align="center">
+  <?for($count = 0; $count < 88; $count++) {
+    if($count%8 == 0) {?>
+      <tr>
+    <?}?>
+    <td width="300" height="25" align="center"><a href="http://localhost/seiza/detail_star_result.php?id=<?echo $count?>"><?print $result["result"][$count]["jpName"];?></td>
+      <?if($count%8 == 7) {?>
+        </tr>
+      <?}
   }?>
+</table>
+</h3>
 
 </body>
 </html>

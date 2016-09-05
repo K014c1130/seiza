@@ -34,7 +34,7 @@
     if($count%8 == 0) {?>
       <tr>
     <?}?>
-    <td width="300" height="25" align="center"><a href="http://localhost/seiza/detail_star_result.php?id=<?echo $count?>"><?print $result["result"][$count]["jpName"];?></td>
+    <td width="300" height="35"><a href="http://localhost/seiza/detail_star_result.php?id=<?echo $count?>"><?print $result["result"][$count]["jpName"];?></td>
       <?if($count%8 == 7) {?>
         </tr>
       <?}

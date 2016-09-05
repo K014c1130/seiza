@@ -39,7 +39,6 @@
     <td valign="top">
    <h3>
      英名<br><?print $result["result"][$id]["enName"];?><br><br>
-     略式<br><?print $result["result"][$id]["roughly"];?><br><br>
      解説<br><?print $result["result"][$id]["content"];?><br><br>
      起源<br><?print $result["result"][$id]["origin"];?><br>
 </h3>

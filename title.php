@@ -33,27 +33,53 @@
 </CENTER>
 <br>
 <l1 class="title">
-  <a href="リンク先のＵＲＬ">星座の方角</a><br>
-  <l2 class="title"></l2>今いる位置から星座達がどの方向にいるのか知ることができます<br>
+  <a href="リンク先のＵＲＬ" style="background-color:#000000;">星座の方角</a><br>
+  <l2 class="title"></l2>今いる位置から星座達がどの方向にいるのか知ることができます。<br>
   <br>
-  <a href="リンク先のＵＲＬ">現在地から見える星座</a><br>
-  <l2 class="title"></l2>今いる場所から見える星座がわかります<br>
+  <a href="リンク先のＵＲＬ" style="background-color:#000000;">現在地から見える星座</a><br>
+  <l2 class="title"></l2>今いる場所から見える星座がわかります。<br>
     <br>
-  <a href="リンク先のＵＲＬ">星座の説明</a><br>
+  <a href="リンク先のＵＲＬ" style="background-color:#000000;">星座の説明</a><br>
   <l2 class="title"></l2>星座達の詳しい情報が見れます。<br>
     <br>
-  <a href="リンク先のＵＲＬ">星座占い</a><br>
-  <l2 class="title"></l2>星座占いが見れます。あなたの運勢は...</l2>
+  <a href="リンク先のＵＲＬ" style="background-color:#000000;">星座占い</a><br>
+  <l2 class="title"></l2>星座占いが見れます。あなたの運勢は...<br>
+    <br>
+    <br>
     <br>
 </l1>
-<?php
-
-
-?>
 </fontcolor>
 
-<img src=<?= $result["result"][1]["starImage"]?>>
+
+<?php
+$ran = rand(1,90);//乱数生成
+
+if($ran == 89){
+    $ran = 100;
+  }
+else if($ran == 90){
+    $ran = 101;
+  }
+?>
 
 
+
+
+  <div style="position:absolute; top:73px; left:500px;">
+
+  <FONT color="yellow">
+    <?php
+    print "「{$result["result"][$ran]["jpName"]}」
+    （英名:「{$result["result"][$ran]["enName"]}」）";
+    ?>
+  </FONT>
+  </div><br>
+
+  <div style="position:absolute; top:90px; left:500px;"><img src=<?= $result["result"][$ran]["starImage"]?> alt="konkai_no_seiza"
+    align="center"
+    ></div>
+
+  <br>
+  <br>
 </body>
 </html>

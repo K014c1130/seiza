@@ -65,19 +65,19 @@ else if($ran == 90){
 
 
 
-<div style="position:absolute; top:90px; left:500px;"><img src=<?= $result["result"][$ran]["starImage"]?> alt="konkai_no_seiza"
-  align="center"
-  ></div>
-  <div style="position:absolute; top:90px; left:500px;">
-  <FONT color="yellow"><text>気まぐれ星座・・・</text></FONT>
-  <FONT color="white">
+  <div style="position:absolute; top:73px; left:500px;">
+
+  <FONT color="yellow">
     <?php
     print "「{$result["result"][$ran]["jpName"]}」
     （英名:「{$result["result"][$ran]["enName"]}」）";
     ?>
   </FONT>
-  </div>
-</FONT><br>
+  </div><br>
+
+  <div style="position:absolute; top:90px; left:500px;"><img src=<?= $result["result"][$ran]["starImage"]?> alt="konkai_no_seiza"
+    align="center"
+    ></div>
 
   <br>
   <br>

@@ -36,14 +36,14 @@
   <a href="リンク先のＵＲＬ" style="background-color:#000000;">星座の方角</a><br>
   <l2 class="title"></l2>今いる位置から星座達がどの方向にいるのか知ることができます。<br>
   <br>
-  <a href="リンク先のＵＲＬ" style="background-color:#000000;">現在地から見える星座</a><br>
+  <a href="リンク先のＵＲＬ" style="background-color:#000000;">現在の位置から見える星座</a><br>
   <l2 class="title"></l2>今いる場所から見える星座がわかります。<br>
     <br>
-  <a href="リンク先のＵＲＬ" style="background-color:#000000;">星座の説明</a><br>
-  <l2 class="title"></l2>星座達の詳しい情報が見れます。<br>
+  <a href="detail_star.php" style="background-color:#000000;">星座の詳細</a><br>
+  <l2 class="title"></l2>星座の詳しい情報が見れます。<br>
     <br>
-  <a href="リンク先のＵＲＬ" style="background-color:#000000;">星座占い</a><br>
-  <l2 class="title"></l2>星座占いが見れます。あなたの運勢は...<br>
+  <a href="horoscopes.php" style="background-color:#000000;">星座占い</a><br>
+  <l2 class="title"></l2>星座占いが見れます。あなたは何座ですか？<br>
     <br>
     <br>
     <br>
@@ -52,20 +52,15 @@
 
 
 <?php
-$ran = rand(1,90);//乱数生成
+$ran = rand(1,88);//乱数生成
 
-if($ran == 89){
-    $ran = 100;
-  }
-else if($ran == 90){
-    $ran = 101;
-  }
+$rans = $ran
 ?>
 
 
 
 
-  <div style="position:absolute; top:73px; left:500px;">
+  <div  style="position:absolute; top:73px; left:500px;">
 
   <FONT color="yellow">
     <?php
@@ -73,11 +68,13 @@ else if($ran == 90){
     （英名:「{$result["result"][$ran]["enName"]}」）";
     ?>
   </FONT>
+
   </div><br>
 
-  <div style="position:absolute; top:90px; left:500px;"><img src=<?= $result["result"][$ran]["starImage"]?> alt="konkai_no_seiza"
-    align="center"
-    ></div>
+  <a href="detail_star_result.php?id=<?echo $ran?>"
+   style="position:absolute; top:90px; left:500px;">
+    <img src=<?= $result["result"][$rans]["starImage"]?> alt="konkai_no_seiza" align="center">
+  </a>
 
   <br>
   <br>

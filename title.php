@@ -20,7 +20,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <?php //cssファイルの読み込み?>
   <link rel="stylesheet" type="text/css" href="seiza.css">
+
   <title>星座_title</title>
 </head>
 <body>
@@ -33,7 +35,7 @@
 </CENTER>
 <br>
 <l1 class="title">
-  <a href="direction.php" style="background-color:#000000;">星座の方角</a><br>
+  <a href="direction.php" style="background-color:#000000; position:absolute; top:73px;">星座の方角</a><br>
   <l2 class="title"></l2>今いる位置から星座達がどの方向にいるのか知ることができます。<br>
   <br>
   <a href="here_star.php" style="background-color:#000000;">現在の位置から見える星座</a><br>
@@ -53,12 +55,12 @@
 <?php
 $ran = rand(1,88);//乱数生成?>
 
-  <div  style="position:absolute; top:73px; left:500px;">
+  <div  style="background-color:#000066; position:absolute; top:73px; left:500px;">
   <FONT color="yellow">
 
 
 <?php
-print "「{$result["result"][$ran]["jpName"]}」（英名:{$result["result"][$ran]["enName"]}）";?>
+ print "「{$result["result"][$ran]["jpName"]}」（英名:{$result["result"][$ran]["enName"]}）";?>
 
   </FONT>
   </div>

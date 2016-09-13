@@ -9,6 +9,7 @@
     <h1>星座占い</h1>
     <hr>
   </DIV>
+  <CENTER><text>さあ、あなたは何座ですか？</text></CENTER><br>
   <table border=0 width=200 height=200 align="center">
    <tr align="center"><td><a href="horoscopes_result.php?num=0"><h3>牡羊座</h3></a></td>
      <td><a href="horoscopes_result.php?num=6"><h3>天秤座</h3></a></td></tr>

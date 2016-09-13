@@ -55,11 +55,14 @@ $ran = rand(1,88);//乱数生成?>
 
   <div  style="position:absolute; top:73px; left:500px;">
   <FONT color="yellow">
-    <?php　  //ランダム星座画像
-    print "「{$result["result"][$ran]["jpName"]}」
-    （英名:「{$result["result"][$ran]["enName"]}」）";?>
+
+
+<?php
+print "「{$result["result"][$ran]["jpName"]}」（英名:{$result["result"][$ran]["enName"]}）";?>
+
   </FONT>
-  </div><br>
+  </div>
+  <br>
 
   <a href="detail_star_result.php?id=<?echo $ran?>"
    style="position:absolute; top:90px; left:500px;">

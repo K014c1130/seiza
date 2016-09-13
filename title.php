@@ -21,35 +21,33 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="title.css">
-  <title>星座_title</title>
+  <title>星空旅行</title>
 </head>
 <body>
   <fontcolor class="title">
 <CENTER>
+  <h1>
   <startitle class="title">
     星空旅行
   </startitle>
-    <i>-素晴らしき夜空の世界へようこそ-</i><br>
+    <i>-素晴らしき夜空の世界へようこそ-</i></h1>
 </CENTER>
+<hr>
 <br>
 <l1 class="title">
-  <a href="リンク先のＵＲＬ">星座の方角</a><br>
-  <l2 class="title"></l2>今いる位置から星座達がどの方向にいるのか知ることができます<br>
+  <a href="direction.php">星座の方角</a><br>
+  <l2 class="title"></l2>今いる位置から星座達がどの方向にいるのか知ることができます。<br>
   <br>
-  <a href="リンク先のＵＲＬ">現在地から見える星座</a><br>
-  <l2 class="title"></l2>今いる場所から見える星座がわかります<br>
+  <a href="here_star.php">現在地から見える星座</a><br>
+  <l2 class="title"></l2>今いる場所から見える星座がわかります。<br>
     <br>
-  <a href="リンク先のＵＲＬ">星座の説明</a><br>
+  <a href="detail_star.php">星座の説明</a><br>
   <l2 class="title"></l2>星座達の詳しい情報が見れます。<br>
     <br>
-  <a href="リンク先のＵＲＬ">星座占い</a><br>
-  <l2 class="title"></l2>星座占いが見れます。あなたの運勢は...</l2>
+  <a href="horoscopes.php">星座占い</a><br>
+  <l2 class="title"></l2>星座占いが見れます。あなたの運勢は……</l2>
     <br>
 </l1>
-<?php
-
-
-?>
 </fontcolor>
 
 <img src=<?= $result["result"][1]["starImage"]?>>

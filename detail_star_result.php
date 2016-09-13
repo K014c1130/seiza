@@ -34,7 +34,7 @@
   <table>
     <tr>
     <td>
-      <img src="<?= $result['result'][$id]["starImage"] ?>"><br>
+      <img src="<?= $result["result"][$id]["starImage"] ?>"><br>
     </td>
     <td valign="top">
    <h3>

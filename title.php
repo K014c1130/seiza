@@ -21,7 +21,7 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="title.css">
-  <title>星座_title</title>
+  <title>星空旅行</title>
 </head>
 <body>
   <fontcolor class="title">
@@ -33,17 +33,17 @@
 </CENTER>
 <br>
 <l1 class="title">
-  <a href="リンク先のＵＲＬ" style="background-color:#000000;">星座の方角</a><br>
+  <a href="direction.php" style="background-color:#000000;">星座の方角</a><br>
   <l2 class="title"></l2>今いる位置から星座達がどの方向にいるのか知ることができます。<br>
   <br>
-  <a href="リンク先のＵＲＬ" style="background-color:#000000;">現在地から見える星座</a><br>
+  <a href="here_star.php" style="background-color:#000000;">現在地から見える星座</a><br>
   <l2 class="title"></l2>今いる場所から見える星座がわかります。<br>
     <br>
-  <a href="リンク先のＵＲＬ" style="background-color:#000000;">星座の説明</a><br>
+  <a href="detail_star.php" style="background-color:#000000;">星座の説明</a><br>
   <l2 class="title"></l2>星座達の詳しい情報が見れます。<br>
     <br>
-  <a href="リンク先のＵＲＬ" style="background-color:#000000;">星座占い</a><br>
-  <l2 class="title"></l2>星座占いが見れます。あなたの運勢は...<br>
+  <a href="horoscopes.php" style="background-color:#000000;">星座占い</a><br>
+  <l2 class="titlo"></l2>星座占いが見れます。あなたの運勢は...<br>
     <br>
     <br>
     <br>
@@ -53,7 +53,6 @@
 
 <?php
 $ran = rand(1,90);//乱数生成
-
 if($ran == 89){
     $ran = 100;
   }

@@ -16,21 +16,20 @@
                       $proxy_context
                 );
     $result = json_decode($response,true);
-
-
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>星座の方向</title>
 </head>
-<p><h1>     星座の方角      </h1></p>
-
+<Div Align="center"><h1>星座の方角</h1></Div>
+<hr>
 <tr>
-  <p> <td><input type="text" name="name" size="30" maxlength="20"></td><td>
+  <td><input type="text" name="name" size="30" maxlength="20"></td><td>
     <input type="submit" value="現在位置"></p>
-<p><select name="見たい星座">
+<select name="見たい星座">
       <?php
 for ($i = 0; $i < 88; $i++) {
   ?>
@@ -40,11 +39,6 @@ for ($i = 0; $i < 88; $i++) {
 ?>
 </select></p>
 
-
-
-
-
-
 <select name="month">
   <script>
     var i;
@@ -52,35 +46,24 @@ for ($i = 0; $i < 88; $i++) {
   	  document.write('<option value="i">'+i+'月</option>');
     }
   </script>
-
 </select>
-
-
-
 
   <select name="day">
   <script>
-
     var i;
     for(i=1; i<=31; i++){
   	  document.write('<option value="i">'+i+'日</option>');
     }
   </script>
-
 </select>
 
-
-
-
 <select>
-
   <script>
     var i;
     for(i=0; i<=23; i++){
   	  document.write('<option value="i">'+i+'時</option>');
     }
   </script>
-
   </script>
     </td>
  </tr>

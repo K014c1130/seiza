@@ -44,6 +44,8 @@
 </h3>
 </td>
 </tr>
-  </div>
+</table>
+<br><br>
+<center><a href="detail_star.php">もどる</a></center>
 </body>
 </html>

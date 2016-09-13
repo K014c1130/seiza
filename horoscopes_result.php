@@ -36,7 +36,7 @@
      <tr align="center"><td>トータル</td><td><?= $result['horoscope'][date("Y/m/d")][$_GET['num']]['total'] ?></td></tr>
      <tr align="center"><td>ランク</td><td><?= $result['horoscope'][date("Y/m/d")][$_GET['num']]['rank'] ?></td></tr>
     </table>
-
-
+    <br><br>
+    <center><a href="horoscopes.php">もどる</a></center>
   </body>
   </html>

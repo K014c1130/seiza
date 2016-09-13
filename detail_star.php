@@ -41,6 +41,8 @@
   }?>
 </table>
 </h3>
+<br><br>
+<center><a href="title.php">もどる</a></center>
 
 </body>
 </html>

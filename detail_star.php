@@ -19,11 +19,12 @@
 ?>
 
 <!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="seiza.css">
 <html lang="ja">
+<fontcolor class="title">
 <head>
   <meta charset="UTF-8">
   <title>星座一覧</title>
-  </script>
 </head>
 <?php
 class Seiza {
@@ -53,13 +54,13 @@ foreach ($seiza_list as $value) {
   <Div Align="center"><h1>星座一覧</h1></Div>
   <hr>
   <h3>
-  <table align="center">
+  <table align="center" style="color:#ffffff">
   <?for($count = 0; $count < 88; $count++) {
     if($count%8 == 0) {?>
       <tr>
     <?}?>
     <td width="300" height="35">
-      <a href="http://localhost/seiza/detail_star_result.php?id=<?= $seiza_list[$count]->id?>"><?print $seiza_list[$count]->name;?></td>
+      <a href="http://localhost/seiza/detail_star_result.php?id=<?= $seiza_list[$count]->id?>" style="background-color:#000000;"><?print $seiza_list[$count]->name;?></td>
       <?if($count%8 == 7) {?>
         </tr>
       <?}
@@ -70,4 +71,5 @@ foreach ($seiza_list as $value) {
 <center><a href="title.php">もどる</a></center>
 
 </body>
+</fontcolor>
 </html>

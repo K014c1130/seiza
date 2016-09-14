@@ -18,14 +18,15 @@
   $result = json_decode($response,true);
 ?>
 <!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="seiza.css">
 <?if(isset($_GET['id'])) {
       $id = $_GET['id'];
   }?>
 <html lang="ja">
+<fontcolor class="title">
 <head>
   <meta charset="UTF-8">
   <title><?print $result["result"][$id]["jpName"];?></title>
-  </script>
 </head>
 
 <body>
@@ -48,4 +49,5 @@
 <br><br>
 <center><a href="detail_star.php">もどる</a></center>
 </body>
+</fontcolor>
 </html>

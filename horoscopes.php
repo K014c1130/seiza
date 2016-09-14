@@ -1,5 +1,7 @@
 <DOCTYPE html>
+  <link rel="stylesheet" type="text/css" href="seiza.css">
 <html>
+<fontcolor class="title">
   <head>
     <meta charset="UTF-8">
     <title>星座占い</title>
@@ -10,7 +12,7 @@
     <hr>
   </DIV>
   <CENTER><text>さあ、あなたは何座ですか？</text></CENTER><br>
-  <table border=0 width=200 height=200 align="center">
+  <table border=0 width=200 height=200 align="center" style="color:#ffffff">
    <tr align="center"><td><a href="horoscopes_result.php?num=0"><h3>牡羊座</h3></a></td>
      <td><a href="horoscopes_result.php?num=6"><h3>天秤座</h3></a></td></tr>
 
@@ -32,4 +34,5 @@
   <br><br>
   <center><a href="title.php">もどる</a></center>
   </body>
+</fontcolor>
 </html>

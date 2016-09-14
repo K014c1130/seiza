@@ -35,18 +35,23 @@
 </CENTER>
 <br>
 <l1 class="title">
-  <a href="direction.php" style="background-color:#000000;">星座の方角</a><br>
+
+  <a href="direction.php" style="position:absolute; top:73px;">星座の方角</a><br>
   <l2 class="title"></l2>今いる位置から星座達がどの方向にいるのか知ることができます。<br>
   <br>
-  <a href="here_star.php" style="background-color:#000000;">現在の位置から見える星座</a><br>
+
+  <a href="here_star.php">現在の位置から見える星座</a><br>
   <l2 class="title"></l2>今いる場所から見える星座がわかります。<br>
     <br>
-  <a href="detail_star.php" style="background-color:#000000;">星座の詳細</a><br>
+
+  <a href="detail_star.php">星座の詳細</a><br>
   <l2 class="title"></l2>星座の詳しい情報が見れます。<br>
     <br>
-  <a href="horoscopes.php" style="background-color:#000000;">星座占い</a><br>
+
+  <a href="horoscopes.php" >星座占い</a><br>
   <l2 class="title"></l2>星座占いが見れます。あなたは何座ですか？<br>
     <br>
+
     <br>
     <br>
 </l1>
@@ -55,7 +60,7 @@
 <?php
 $ran = rand(1,88);//乱数生成?>
 
-  <div  style="background-color:#000066; position:absolute; top:73px; left:500px;">
+  <div  style=" position:absolute; top:73px; left:500px;">
   <FONT color="yellow">
 
 
@@ -68,7 +73,7 @@ $ran = rand(1,88);//乱数生成?>
 
   <a href="detail_star_result.php?id=<?echo $ran?>"
    style="position:absolute; top:90px; left:500px;">
-    <img src=<?= $result["result"][$ran]["starImage"]?> alt="konkai_no_seiza" align="center">
+    <img src=<?= $result["result"][$ran]["starImage"]?> alt="ran_seizu" align="center">
   </a>
 
   <br>

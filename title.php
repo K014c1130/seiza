@@ -36,7 +36,7 @@
 <br>
 <l1 class="title">
 
-  <a href="direction.php" style="position:absolute; top:73px;">星座の方角</a><br>
+  <a href="direction.php">星座の方角</a><br>
   <l2 class="title"></l2>今いる位置から星座達がどの方向にいるのか知ることができます。<br>
   <br>
 

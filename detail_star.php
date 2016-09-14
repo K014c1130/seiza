@@ -54,13 +54,13 @@ foreach ($seiza_list as $value) {
   <Div Align="center"><h1>星座一覧</h1></Div>
   <hr>
   <h3>
-  <table align="center" style="color:#ffffff">
+  <table align="center">
   <?for($count = 0; $count < 88; $count++) {
     if($count%8 == 0) {?>
       <tr>
     <?}?>
     <td width="300" height="35">
-      <a href="http://localhost/seiza/detail_star_result.php?id=<?= $seiza_list[$count]->id?>" style="background-color:#000000;"><?print $seiza_list[$count]->name;?></td>
+      <a href="http://localhost/seiza/detail_star_result.php?id=<?= $seiza_list[$count]->id?>"><?print $seiza_list[$count]->name;?></td>
       <?if($count%8 == 7) {?>
         </tr>
       <?}

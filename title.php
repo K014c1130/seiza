@@ -23,7 +23,7 @@
   <?php //cssファイルの読み込み?>
   <link rel="stylesheet" type="text/css" href="seiza.css">
 
-  <title>星座_title</title>
+  <title>星空旅行</title>
 </head>
 <body>
   <fontcolor class="title">
@@ -35,7 +35,11 @@
 </CENTER>
 <br>
 <l1 class="title">
+<<<<<<< HEAD
   <a href="direction.php" style="position:absolute; top:73px;">星座の方角</a><br>
+=======
+  <a href="direction.php" style="background-color:#000000;">星座の方角</a><br>
+>>>>>>> 8d4a70b28f34f293799af78b9240503ccaad2669
   <l2 class="title"></l2>今いる位置から星座達がどの方向にいるのか知ることができます。<br>
   <br>
   <a href="here_star.php">現在の位置から見える星座</a><br>

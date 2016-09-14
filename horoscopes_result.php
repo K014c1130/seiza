@@ -1,5 +1,7 @@
 <DOCTYPE html>
+  <link rel="stylesheet" type="text/css" href="seiza.css">
   <html>
+  <fontcolor class="title">
   <head>
     <meta charset="UTF-8">
     <title>星座占いの結果</title>
@@ -26,7 +28,7 @@
 
 
     <h1 align="center"> <?= $result['horoscope'][date("Y/m/d")][$_GET['num']]['sign'] ?> :占いの結果</h1>
-    <table border=1 width=500 height=500 align="center">
+    <table border=1 width=500 height=500 align="center" style="color:#ffffff">
      <tr align="center"><td>結果</td><td><?= $result['horoscope'][date("Y/m/d")][$_GET['num']]['content'] ?></td></tr>
 
      <tr align="center"><td>金運</td><td>
@@ -47,7 +49,7 @@
      <tr align="center"><td>ラッキアイテム</td><td><?= $result['horoscope'][date("Y/m/d")][$_GET['num']]['item'] ?></td></tr>
 
      <tr align="center"><td>ラッキカラー</td><td><?= $result['horoscope'][date("Y/m/d")][$_GET['num']]['color'] ?></td></tr>
-     
+
      <tr align="center"><td>トータル</td><td>
       <?php for($cont = 1; $cont <= $result['horoscope'][date("Y/m/d")][$_GET['num']]['total']; $cont++){
        echo '<img src="image/total.png" width="20" height="20"">';}?>
@@ -55,7 +57,8 @@
 
      <tr align="center"><td>星座順位</td><td><?= $result['horoscope'][date("Y/m/d")][$_GET['num']]['rank'] ?>位</td></tr>
     </table>
-
-
+    <br><br>
+    <center><a href="horoscopes.php">もどる</a></center>
   </body>
+  </fontcolor>
   </html>

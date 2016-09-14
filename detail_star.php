@@ -45,6 +45,9 @@ foreach ($result['result'] as $value) {
   $seiza_list[] = new Seiza($value['jpName'], $value['id']);
 }
 usort($seiza_list, "seiza_sort");
+foreach ($seiza_list as $value) {
+  $value->id = $value->id - 1;
+}
 ?>
 <body>
   <Div Align="center"><h1>星座一覧</h1></Div>

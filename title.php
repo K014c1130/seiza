@@ -35,22 +35,23 @@
 </CENTER>
 <br>
 <l1 class="title">
-<<<<<<< HEAD
+
   <a href="direction.php" style="position:absolute; top:73px;">星座の方角</a><br>
-=======
-  <a href="direction.php" style="background-color:#000000;">星座の方角</a><br>
->>>>>>> 8d4a70b28f34f293799af78b9240503ccaad2669
   <l2 class="title"></l2>今いる位置から星座達がどの方向にいるのか知ることができます。<br>
   <br>
+
   <a href="here_star.php">現在の位置から見える星座</a><br>
   <l2 class="title"></l2>今いる場所から見える星座がわかります。<br>
     <br>
+
   <a href="detail_star.php">星座の詳細</a><br>
   <l2 class="title"></l2>星座の詳しい情報が見れます。<br>
     <br>
+
   <a href="horoscopes.php" >星座占い</a><br>
   <l2 class="title"></l2>星座占いが見れます。あなたは何座ですか？<br>
     <br>
+
     <br>
     <br>
 </l1>

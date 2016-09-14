@@ -20,8 +20,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <?php //cssファイルの読み込み?>
   <link rel="stylesheet" type="text/css" href="seiza.css">
-  <title>星座_title</title>
+
+  <title>星空旅行</title>
 </head>
 <body>
   <fontcolor class="title">
@@ -53,13 +55,16 @@
 <?php
 $ran = rand(1,88);//乱数生成?>
 
-  <div  style="position:absolute; top:73px; left:500px;">
+  <div  style="background-color:#000066; position:absolute; top:73px; left:500px;">
   <FONT color="yellow">
-    <?php　  //ランダム星座画像
-    print "「{$result["result"][$ran]["jpName"]}」
-    （英名:「{$result["result"][$ran]["enName"]}」）";?>
+
+
+<?php
+ print "「{$result["result"][$ran]["jpName"]}」（英名:{$result["result"][$ran]["enName"]}）";?>
+
   </FONT>
-  </div><br>
+  </div>
+  <br>
 
   <a href="detail_star_result.php?id=<?echo $ran?>"
    style="position:absolute; top:90px; left:500px;">

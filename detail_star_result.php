@@ -19,7 +19,7 @@
 ?>
 <!DOCTYPE html>
 <?if(isset($_GET['id'])) {
-      $id = $_GET['id'] - 1;
+      $id = $_GET['id'];
   }?>
 <html lang="ja">
 <head>

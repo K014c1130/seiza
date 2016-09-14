@@ -58,7 +58,7 @@
 </fontcolor>
 
 <?php
-$ran = rand(1,88);//乱数生成?>
+$ran = rand(0,87);//乱数生成?>
 
   <div  style=" position:absolute; top:73px; left:500px;">
   <FONT color="yellow">

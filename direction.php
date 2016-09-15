@@ -4,7 +4,7 @@
     $let =  0;//緯度
     $lng =  0;//緯度
       date_default_timezone_set('Asia/Tokyo'); //タイムゾーンの設定(東京)
-      
+
 //変数受け渡し。　PHP→javascript で使用
       $mo = date('m');
       $da = date('d');
@@ -29,6 +29,31 @@
                       $proxy_context
                 );
     $result = json_decode($response,true);
+
+class Seiza {
+  Var $name;
+  var $id;
+
+  function __construct($n, $i) {
+    $this->name = $n;
+    $this->id = $i;
+  }
+}
+
+  function seiza_sort($a, $b){
+      $a = mb_convert_kana($a->name, 'c');
+      $b = mb_convert_kana($b->name, 'c');
+      return strcasecmp($a, $b);
+  }
+foreach ($result['result'] as $value) {
+  $seiza_list[] = new Seiza($value['jpName'], $value['id']);
+}
+usort($seiza_list, "seiza_sort");
+foreach ($seiza_list as $value) {
+  $value->id = $value->id - 1;
+}
+//「$seiza_list[0]->name」　・・・ソート後の星座名の取り出し
+//
 ?>
 
 <!DOCTYPE html>
@@ -93,9 +118,11 @@ mapInit(new google.maps.LatLng(lat, lng));
 
 <select name="見たい星座">
       <?php
+
+
 for ($i = 0; $i < 88; $i++) {
   ?>
-          <option><?= $result["result"][$i]["jpName"] ?></option>
+          <option><?= $seiza_list[$i]->name; ?></option>
 <?php
 }
 ?>

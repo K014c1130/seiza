@@ -1,7 +1,16 @@
 <?php
     $error="";
+
+    $let =  0;//緯度
+    $lng =  0;//緯度
+      date_default_timezone_set('Asia/Tokyo'); //タイムゾーンの設定(東京)
+      //↓現在時刻の習得
+      $data = date('Y-m-d');//日付
+      $hour = date('H');//時間
+      $min = date('i');//分
+
     $base_url = 'http://linedesign.cloudapp.net/hoshimiru/constellation';
-    $query = ['lat'=>0, 'lng'=>0 ,'date'=>'2016-01-01', 'hour'=>0, 'min'=>0, 'disp'=>'on' ];
+    $query = ['lat'=>$let, 'lng'=>$lng, 'date'=>$data, 'hour'=>$hour, 'min'=>$min,　'disp'=>'on' ];
     $proxy = array(
       "http" => array(
        "proxy" => "tcp://proxy.kmt.neec.ac.jp:8080",

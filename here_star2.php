@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -48,53 +47,28 @@
       }
 
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   </head>
   <body>
     <h1>
-      現在地から見える星座
+      指定場所から見える星座
     </h1>
     <p>
-    <form id = 'form' >
+    <!-- <form id = 'form' > -->
       <div>
         <ul id ="ul">
           <li>
-      <input id="location" name = "address" type = "text" size　= "70" placeholder="表示したい場所名を入力" />
+      <input id="location" name = "address" type = "text" size　= "70" placeholder="場所名を入力" onkeypress="keyOn();" />
       <input type ="button" value = "マップを表示" onClick="getGeocoording();">
       <input id="searchHere" name = "searchHere" type = "button" value = "現在地取得" onClick="getHere();" />
-
+          </li>
+          <li>
+              <label for="errLabel"><div id="errLabel"></div></label>
           </li>
           <p>
-          <!-- <br />
-          <li>
-      <select id="horoscope" name = "selectStar" >
-      </select>
-    </li>
-    <br /> -->
-      <li>
-      <select id="month" name = "month">
-        <?php for($i = 1;$i <= 12;$i++){ ?>
-        <option value ="<?= $i ?>"><?= $i ?>月</option>
-        <?php } ?>
-      </select>
-
-      <select id="day" name = "day">
-        <?php for($i = 1;$i <= 31;$i++){ ?>
-        <option value ="<?= $i ?>"><?= $i ?>日</option>
-        <?php } ?>
-      </select>
-
-      <select id="hour" name = "hour">
-        <?php for($i = 0;$i <= 23;$i++){ ?>
-        <option value ="<?= $i ?>"><?= $i ?>時</option>
-        <?php } ?>
-      </select>
-
-      <input type = "button" name="searchTime" value = "現在時刻を取得" onClick="getTime();">
-    </li>
     </ul>
     </div>
-    </form>
-
+    <!-- </form> -->
     <h5>
     　 星座のボタンによって星座の方角がわかるよ！
   </h5>
@@ -104,8 +78,8 @@
     </ul>
     <div id="map"></div>
     <div id="pano"></div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script>
+
     var time = new Date();
     var fullDate = time.getFullYear()+"-"+time.getMonth()+"-"+time.getDate();
     var Year = time.getFullYear();
@@ -124,9 +98,17 @@
     var starList = [];
     var seeStarList =[];
 
+
+    function keyOn(){
+      if(window.event.keyCode == 13){
+        getGeocoording();
+        return false;
+      }
+    }
     //現在地取得
     function getHere(){
       reverseGeocoording();
+
     };
 
     //現在時刻取得
@@ -142,12 +124,9 @@
 
 
     function searchStar(searchId){
-
-      month = $("#month").val();
-      day = $("#day").val();
-      hour = $("#hour").val();
-      fullDate = time.getFullYear()+"-"+month+"-"+day;
-
+      fullDate = time.getFullYear()+"-"+time.getMonth()+"-"+time.getDate();
+      hour = time.getHours();
+      minute = time.getMinutes();
       $.getJSON('http://linedesign.cloudapp.net/hoshimiru/constellation?',
         {
           lat: lat,
@@ -191,6 +170,13 @@
     //住所検索結果をマップに反映させる
     function getGeocoording() {
 
+      if($('#location').val() == ""){
+        $("#errLabel").text("場所を入力してください");
+        return false;
+      }else{
+        $("#errLabel").text("");
+      }
+
       $.ajax({
         type: 'GET',
         url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' + $('#location').val(),
@@ -198,10 +184,55 @@
         success: function(response){ console.log(response);
           lat = response['results'][0]['geometry']['location']['lat'];
           lng = response['results'][0]['geometry']['location']['lng'];
+
+          $.getJSON('http://linedesign.cloudapp.net/hoshimiru/constellation?',
+            {
+              lat: lat,
+              lng: lng,
+              date: fullDate,
+              hour: hour,
+              min: minute,
+              disp: "off"
+            }
+          )
+          // 結果を取得したら…
+          .done(function(data) {
+            // 中身が空でなければ、その値を［住所］欄に反映
+            seeStarList.length = 0;
+            console.log(seeStarList);
+
+            var element = document.getElementById("starList");
+            element.removeChild(element.childNodes);
+            for (var i of data.result){
+              var star = {id: i.id,name: i.jpName, image: i.starImage,
+              altitudeNum: i.altitudeNum,directionNum: i.directionNum}
+              seeStarList.push(star);
+            }
+            seeStarList.sort(function(a,b){return (a.name > b.name)? 1:-1});
+            //現在地から見える星座を表示する
+            for (var i of seeStarList){
+              // var li = document.createElement('li');
+              // li.id = i.name;
+              // document.getElementById('canSeeStar').appendChild(li);
+              var input = document.createElement("input");
+              input.setAttribute("id","starButton");
+              input.setAttribute("type","Button");
+              input.setAttribute("value",i.name);
+              input.setAttribute("onClick", 'searchStar('+i.id+');');
+              document.getElementById('starList').appendChild(input);
+
+            }
+          });
+
           load(lat,lng);
         },
         error: function(req, err){ console.log(err); }
       });
+
+
+      console.log(lat);
+      console.log(lng);
+
     }
 
     //リバースジオコーディング

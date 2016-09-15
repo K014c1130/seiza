@@ -36,6 +36,8 @@
     $this->id = $i;
   }
 }
+
+
   function seiza_sort($a, $b){
       $a = mb_convert_kana($a->name, 'c');
       $b = mb_convert_kana($b->name, 'c');
@@ -50,8 +52,6 @@ foreach ($seiza_list as $value) {
 }
 
 
-//「$seiza_list[0]->name」　・・・ソート後の星座名の取り出し
-//
 ?>
 
 
@@ -151,15 +151,21 @@ pov: {
 <form  method="post" action="direction.php">
 
 <select>
-  
+
       <?php
+
+
 for ($i = 0; $i < 88; $i++) {
   ?>
+
           <option><?= $seiza_list[$i] ->name; ?></option>
+
+
 <?php
 }
 ?>
 </form>
+
 
 <?PHP//print "$_POST['seiza_select']";?>
 </select>
@@ -168,22 +174,27 @@ for ($i = 0; $i < 88; $i++) {
   var $mo = "<?php echo $mo?>"
   var $da = "<?php echo $da?>"
   var $ho = "<?php echo $da?>"
-  </script>
 
 
-</select>
-  <select name="month">
+</script>
+<select name="month">
   <script>
-    for(var i=1; i <= 12; i++){
-      if(i == $mo ){
+
+
+    for(var i=1; i<=12; i++){
+      if(i == $mo){
         document.write('<option value="i" selected="selected">'+i+'月</option>');
       }
       else{
-      document.write('<option value="i">'+i+'月</option>');
+  	  document.write('<option value="i">'+i+'月</option>');
     }
-    }
+}
+
   </script>
+
+
 </select>
+
 
   </select>
 

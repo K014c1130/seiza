@@ -10,11 +10,8 @@
       $min = date('i');//分
 
     $base_url = 'http://linedesign.cloudapp.net/hoshimiru/constellation';
-<<<<<<< HEAD
     $query = ['lat'=>$let, 'lng'=>$lng, 'date'=>$data, 'hour'=>$hour, 'min'=>$min, 'disp'=>'on'];
-=======
-    $query = ['lat'=>$let, 'lng'=>$lng, 'date'=>$data, 'hour'=>$hour, 'min'=>$min,　'disp'=>'on' ];
->>>>>>> f10d9744909100b3ea0168d8803d556630a44860
+
     $proxy = array(
       "http" => array(
        "proxy" => "tcp://proxy.kmt.neec.ac.jp:8080",

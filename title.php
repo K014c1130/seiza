@@ -73,7 +73,7 @@ $ran = rand(0,87);//乱数生成?>
 
   <a href="detail_star_result.php?id=<?echo $ran?>"
    style="position:absolute; top:90px; left:500px;">
-    <img src=<?= $result["result"][$ran]["starImage"]?> alt="ran_seizu" align="center">
+    <img src=<?= $result["result"][$ran]["starImage"]?> alt="ran_seizu" align="center" width="640" height="480">
   </a>
 
   <br>

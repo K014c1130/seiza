@@ -4,13 +4,16 @@
     $let =  0;//緯度
     $lng =  0;//緯度
       date_default_timezone_set('Asia/Tokyo'); //タイムゾーンの設定(東京)
-      //↓現在時刻の習得
-      $data = date('Y-m-d');//日付
-      $hour = date('H');//時間
-      $min = date('i');//分
+      
+//変数受け渡し。　PHP→javascript で使用
+      $mo = date('m');
+      $da = date('d');
+      $ho = date('H');
+
+
 
     $base_url = 'http://linedesign.cloudapp.net/hoshimiru/constellation';
-    $query = ['lat'=>$let, 'lng'=>$lng, 'date'=>$data, 'hour'=>$hour, 'min'=>$min, 'disp'=>'on'];
+    $query = ['lat'=>$let, 'lng'=>$lng, 'date'=>date('Y-m-d'), 'hour'=>date('H'), 'min'=>date('i'), 'disp'=>'on'];
 
     $proxy = array(
       "http" => array(
@@ -98,35 +101,63 @@ for ($i = 0; $i < 88; $i++) {
 ?>
 </select></p>
 
+
+<script>
+// ↓変数受け渡し。　PHP→javascript
+var $mo = "<?php echo $mo; ?>";　
+var $da = "<?php echo $da; ?>";
+var $ho = "<?php echo $ho; ?>";
+
+
+</script>
 <select name="month">
   <script>
-    var i;
-    for(i=1; i<=12; i++){
+
+
+    for(var i=1; i<=12; i++){
+      if(i == $mo){
+        document.write('<option value="i" selected="selected">'+i+'月</option>');
+      }
+      else{
   	  document.write('<option value="i">'+i+'月</option>');
     }
+}
+
   </script>
 </select>
 
   <select name="day">
   <script>
-    var i;
-    for(i=1; i<=31; i++){
-  	  document.write('<option value="i">'+i+'日</option>');
+
+    for(var i=1; i<=31; i++){
+      if(i == $da){
+        document.write('<option value="i" selected="selected">'+i+'日</option>');
+      }
+      else{
+      document.write('<option value="i">'+i+'日</option>');
     }
+    }
+
   </script>
 </select>
 
-<select>
+<select name="hour">
   <script>
-    var i;
-    for(i=0; i<=23; i++){
+
+    for(var i=0; i<=23; i++){
+      if(i == $ho){
+        document.write('<option value="i" selected="selected">'+i+'時</option>');
+      }
+      else{
   	  document.write('<option value="i">'+i+'時</option>');
     }
+  }
+
   </script>
   </script>
     </td>
  </tr>
-
+</form>
 <body>
 
 </body>

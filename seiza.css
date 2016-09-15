@@ -1,0 +1,21 @@
+
+body{
+background-image: url("image/star.png");
+background-repeat:repeat;
+}
+fontcolor.title{
+  color:#ffffff
+}
+startitle.title{
+font-size:50px;
+}
+
+l1.title{
+  text-align: left;
+}
+
+l2.title{
+  position:relative;
+  left:10px;
+  color:#ffffff
+}

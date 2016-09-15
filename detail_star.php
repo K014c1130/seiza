@@ -17,14 +17,39 @@
               );
   $result = json_decode($response,true);
 ?>
+
 <!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="seiza.css">
 <html lang="ja">
+<fontcolor class="title">
 <head>
   <meta charset="UTF-8">
   <title>星座一覧</title>
-  </script>
 </head>
+<?php
+class Seiza {
+  Var $name;
+  var $id;
 
+  function __construct($n, $i) {
+    $this->name = $n;
+    $this->id = $i;
+  }
+}
+
+  function seiza_sort($a, $b){
+      $a = mb_convert_kana($a->name, 'c');
+      $b = mb_convert_kana($b->name, 'c');
+      return strcasecmp($a, $b);
+  }
+foreach ($result['result'] as $value) {
+  $seiza_list[] = new Seiza($value['jpName'], $value['id']);
+}
+usort($seiza_list, "seiza_sort");
+foreach ($seiza_list as $value) {
+  $value->id = $value->id - 1;
+}
+?>
 <body>
   <Div Align="center"><h1>星座一覧</h1></Div>
   <hr>
@@ -34,13 +59,17 @@
     if($count%8 == 0) {?>
       <tr>
     <?}?>
-    <td width="300" height="35"><a href="http://localhost/seiza/detail_star_result.php?id=<?echo $count?>"><?print $result["result"][$count]["jpName"];?></td>
+    <td width="300" height="35">
+      <a href="http://localhost/seiza/detail_star_result.php?id=<?= $seiza_list[$count]->id?>"><?print $seiza_list[$count]->name;?></td>
       <?if($count%8 == 7) {?>
         </tr>
       <?}
   }?>
 </table>
 </h3>
+<br><br>
+<center><a href="title.php">もどる</a></center>
 
 </body>
+</fontcolor>
 </html>

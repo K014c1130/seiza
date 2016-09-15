@@ -10,7 +10,8 @@
       $min = date('i');//分
 
     $base_url = 'http://linedesign.cloudapp.net/hoshimiru/constellation';
-    $query = ['lat'=>$let, 'lng'=>$lng, 'date'=>$data, 'hour'=>$hour, 'min'=>$min,　'disp'=>'on' ];
+    $query = ['lat'=>$let, 'lng'=>$lng, 'date'=>$data, 'hour'=>$hour, 'min'=>$min, 'disp'=>'on'];
+
     $proxy = array(
       "http" => array(
        "proxy" => "tcp://proxy.kmt.neec.ac.jp:8080",
@@ -32,12 +33,61 @@
 <head>
   <meta charset="UTF-8">
   <title>星座の方向</title>
+  <script type="text/javascript">
+   if (navigator.geolocation) {
+       // 現在の位置情報取得を実施
+       navigator.geolocation.getCurrentPosition(
+       // 位置情報取得成功時
+       function (p) {
+               var lat = p.coords.latitude;
+               var lng = p.coords.longitude;
+            //   var location ="<li>"+"緯度：" + lat + "</li>";
+              // location += "<li>"+"経度：" + lng + "</li>";
+               document.getElementById("location").innerHTML = location;
+               var centerPosition = new google.maps.LatLng(lat , lng);
+               mapInit(centerPosition);
+       },
+       // 位置情報取得失敗時
+       function (pos) {
+               var location ="<li>位置情報が取得できませんでした。</li>";
+               document.getElementById("location").innerHTML = location;
+       });
+   } else {
+       window.alert("本ブラウザではGeolocationが使えません");
+   }
+
+</script>
+
+
+   <ul id="location">
+   </ul>
 </head>
 <Div Align="center"><h1>星座の方角</h1></Div>
 <hr>
 <tr>
-  <td><input type="text" name="name" size="30" maxlength="20"></td><td>
-    <input type="submit" value="現在位置"></p>
+  <p> <td><div id="panel">
+      <input id="address" type="text" value="" size="35">
+      <input type="button" id="button" value="検索" onclick=>
+    </div>
+    <div id="map-canvas"></div></p>
+    <div id="mapField" style="width: 350px;height: 350px;"></div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCdVSV5ixujGbOl2dt0knIOrxNAMKDVQs"></script>
+<script type="text/javascript">
+function mapInit(location) {
+//    var centerPosition = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+
+var option = {
+    zoom : 18,
+    center : location,
+    mapTypeId : google.maps.MapTypeId.ROADMAP
+};
+//地図本体描画
+var googlemap = new google.maps.Map(document.getElementById("mapField"), option);
+}
+
+mapInit(new google.maps.LatLng(lat, lng));
+</script>
+
 <select name="見たい星座">
       <?php
 for ($i = 0; $i < 88; $i++) {

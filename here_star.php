@@ -5,10 +5,14 @@
     <meta charset="utf-8">
     <title>Street View side-by-side</title>
     <style>
-      #ul {
+      #ul{
         width: 500px;
         margin: 0 auto;
         list-style: none;
+      }
+
+      h1{
+        text-align: center;
       }
 
       html, body {
@@ -22,11 +26,22 @@
         width: 45%;
       }
 
-      #date {
+      #month, #day, #hour, #starButton{
         margin-right: 10px;
       }
 
-      #form {
+      #starList{
+        list-style: none;
+      }
+
+      #starButton{
+
+        margin-right: 10px;
+        width: 120px;
+        height: 20px;
+      }
+
+      #form{
 
         width: 100px
         float: left;
@@ -35,51 +50,56 @@
     </style>
   </head>
   <body>
+    <h1>
+      現在地から見える星座
+    </h1>
+    <p>
     <form id = 'form' >
       <div>
         <ul id ="ul">
           <li>
-      <input id="location" name = "address" type = "text" size= "40" />
+      <input id="location" name = "address" type = "text" size　= "70" placeholder="表示したい場所名を入力" />
+      <input type ="button" value = "マップを表示" onClick="getGeocoording();">
       <input id="searchHere" name = "searchHere" type = "button" value = "現在地取得" onClick="getHere();" />
+
           </li>
-          <br />
+          <p>
+          <!-- <br />
           <li>
       <select id="horoscope" name = "selectStar" >
       </select>
     </li>
-    <br />
+    <br /> -->
       <li>
       <select id="month" name = "month">
-        <option value ="false">月</option>
         <?php for($i = 1;$i <= 12;$i++){ ?>
-        <option value ="<?= $i ?>"><?= $i ?></option>
-        <?php } ?>c
+        <option value ="<?= $i ?>"><?= $i ?>月</option>
+        <?php } ?>
       </select>
 
       <select id="day" name = "day">
-        <option value ="false">日</option>
         <?php for($i = 1;$i <= 31;$i++){ ?>
-        <option value ="<?= $i ?>"><?= $i ?></option>
+        <option value ="<?= $i ?>"><?= $i ?>日</option>
         <?php } ?>
       </select>
 
       <select id="hour" name = "hour">
-        <option value ="false">時</option>
         <?php for($i = 0;$i <= 23;$i++){ ?>
-        <option value ="<?= $i ?>"><?= $i ?></option>
+        <option value ="<?= $i ?>"><?= $i ?>時</option>
         <?php } ?>
       </select>
 
       <input type = "button" name="searchTime" value = "現在時刻を取得" onClick="getTime();">
     </li>
-    <li>
-      <input type ="button" value = "検索" onClick="getGeocoording();">
     </ul>
     </div>
     </form>
 
+    <h5>
+    　 星座のボタンによって星座の方角がわかるよ！
+  </h5>
     <ul id ="canSeeStar">
-      <li id ="starLi">
+      <li id ="starList">
       </li>
     </ul>
     <div id="map"></div>
@@ -88,7 +108,9 @@
     <script>
     var time = new Date();
     var fullDate = time.getFullYear()+"-"+time.getMonth()+"-"+time.getDate();
-    var nowDate = time.getDate();
+    var Year = time.getFullYear();
+    var month = time.getMonth()+1;
+    var day = time.getDate();
     var hour = time.getHours();
     var minute = time.getMinutes();
     var lat=0;
@@ -120,13 +142,11 @@
 
 
     function searchStar(searchId){
-      console.log(searchId);
-      var time = new Date();
-      var fullDate = time.getFullYear()+"-"+time.getMonth()+"-"+time.getDate();
-      var nowDate = time.getDate();
-      var hour = time.getHours();
-      var minute = time.getMinutes();
 
+      month = $("#month").val();
+      day = $("#day").val();
+      hour = $("#hour").val();
+      fullDate = time.getFullYear()+"-"+month+"-"+day;
 
       $.getJSON('http://linedesign.cloudapp.net/hoshimiru/constellation?',
         {
@@ -170,6 +190,7 @@
 
     //住所検索結果をマップに反映させる
     function getGeocoording() {
+
       $.ajax({
         type: 'GET',
         url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' + $('#location').val(),
@@ -211,49 +232,50 @@
             // 緯度経度の取得
             latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-                    $.getJSON('http://linedesign.cloudapp.net/hoshimiru/constellation?',
-                      {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude,
-                        date: fullDate,
-                        hour: hour,
-                        min: minute,
-                        disp: "on"
-                      }
-                    )
-                    // 結果を取得したら…
-                    .done(function(data) {
-                      // 中身が空でなければ、その値を［住所］欄に反映
-
-                      for (var i of data.result){
-                        var star = {id: i.id,name: i.jpName, image: i.starImage}
-
-                        starList.push(star);
-                      }
-
-                      //selectに代入
-                      for (var i of starList){
-                        var select = document.createElement('option');
-
-                        select.textContent = i.name;
-                        select.value = i.id;
-                        document.getElementById('horoscope').appendChild(select);
-                      }
-
-                      //ランダムな星を５個表示される
-                      for (var i of starList){
-                        var select = document.createElement('option');
-
-                        select.textContent = i.name;
-                        select.value = i.id;
-                        document.getElementById('horoscope').appendChild(select);
-                      }
-
-
-                      directionNum = data.result[0].directionNum;
-                      altitudeNum = data.result[0].altitudeNum;
-
-                    });
+                    //　selectボックスに全星座の名前を入力する
+                    // $.getJSON('http://linedesign.cloudapp.net/hoshimiru/constellation?',
+                    //   {
+                    //     lat: position.coords.latitude,
+                    //     lng: position.coords.longitude,
+                    //     date: fullDate,
+                    //     hour: hour,
+                    //     min: minute,
+                    //     disp: "on"
+                    //   }
+                    // )
+                    // // 結果を取得したら…
+                    // .done(function(data) {
+                    //   // 中身が空でなければ、その値を［住所］欄に反映
+                    //
+                    //   for (var i of data.result){
+                    //     var star = {id: i.id,name: i.jpName, image: i.starImage}
+                    //
+                    //     starList.push(star);
+                    //   }
+                    //
+                    //   //selectに代入
+                    //   for (var i of starList){
+                    //     var select = document.createElement('option');
+                    //
+                    //     select.textContent = i.name;
+                    //     select.value = i.id;
+                    //     document.getElementById('horoscope').appendChild(select);
+                    //   }
+                    //
+                    //   //ランダムな星を５個表示される
+                    //   for (var i of starList){
+                    //     var select = document.createElement('option');
+                    //
+                    //     select.textContent = i.name;
+                    //     select.value = i.id;
+                    //     document.getElementById('horoscope').appendChild(select);
+                    //   }
+                    //
+                    //
+                    //   directionNum = data.result[0].directionNum;
+                    //   altitudeNum = data.result[0].altitudeNum;
+                    //
+                    // });
 
 
 
@@ -276,16 +298,18 @@
                         altitudeNum: i.altitudeNum,directionNum: i.directionNum}
                         seeStarList.push(star);
                       }
+                      seeStarList.sort(function(a,b){return (a.name > b.name)? 1:-1});
                       //現在地から見える星座を表示する
                       for (var i of seeStarList){
                         // var li = document.createElement('li');
                         // li.id = i.name;
                         // document.getElementById('canSeeStar').appendChild(li);
                         var input = document.createElement("input");
+                        input.setAttribute("id","starButton");
                         input.setAttribute("type","Button");
                         input.setAttribute("value",i.name);
                         input.setAttribute("onClick", 'searchStar('+i.id+');');
-                        document.getElementById('starLi').appendChild(input);
+                        document.getElementById('starList').appendChild(input);
 
                       }
                     });
@@ -329,7 +353,7 @@ function load(lat, lng) {
   var fenway = {lat: lat, lng: lng};
   var map = new google.maps.Map(document.getElementById('map'), {
     center: fenway,
-    zoom: 14
+    zoom: 17
   });
   var panorama = new google.maps.StreetViewPanorama(
       document.getElementById('pano'), {
@@ -339,6 +363,13 @@ function load(lat, lng) {
           pitch: 10
         }
       });
+
+      marker = new google.maps.Marker({
+          position: fenwey,
+          map: map
+      });
+
+
   map.setStreetView(panorama);
 }
 

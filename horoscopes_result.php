@@ -46,9 +46,56 @@
        echo '<img src="image/job.png" width="20" height="20"">';}?>
      </td></tr>
 
-     <tr align="center"><td>ラッキアイテム</td><td><?= $result['horoscope'][date("Y/m/d")][$_GET['num']]['item'] ?></td></tr>
+     <tr align="center"><td>ラッキーアイテム</td><td><?= $result['horoscope'][date("Y/m/d")][$_GET['num']]['item'] ?></td></tr>
 
-     <tr align="center"><td>ラッキカラー</td><td><?= $result['horoscope'][date("Y/m/d")][$_GET['num']]['color'] ?></td></tr>
+     <tr align="center"><td>ラッキーカラー</td><td>
+
+       <?php
+         switch ($result['horoscope'][date("Y/m/d")][$_GET['num']]['color']) {
+
+         case "シルバー":print '<FONT  style="background-color:#c0c0c0" color="#000000">';
+         break;
+
+         case "イエロー":print '<FONT  style="background-color:#ffff00" color="#000000">';
+         break;
+
+         case "グレー":print '<FONT  style="background-color:#696969" color="#ffffff">';
+         break;
+
+         case "パープル":print '<FONT  style="background-color:#800080" color="#ffffff">';
+         break;
+
+         case "ホワイト":print '<FONT  style="background-color:ffffff" color="#000000">';
+         break;
+
+         case "ブルー":print '<FONT  style="background-color:#0000ff" color="#ffffff">';
+         break;
+
+         case "ピンク":print '<FONT  style="background-color:#ffc0cb" color="#000000">';
+         break;
+
+         case "ブラック":print '<FONT  style="background-color:#000000" color="#ffffff">';
+         break;
+
+         case "レッド":print '<FONT  style="background-color:#ff0000" color="#000000">';
+         break;
+
+         case "オレンジ":print '<FONT  style="background-color:#ff4500" color="#000000">';
+         break;
+
+         case "ゴールド":print '<FONT  style="background-color:#ffd700" color="#00000">';
+         break;
+
+         case "グリーン":print '<FONT  style="background-color:#008000" color="#ffffff">';
+         break;
+               }
+
+         print $result['horoscope'][date("Y/m/d")][$_GET['num']]['color'];
+       ?>
+
+
+        </FONT>
+    </td></tr>
 
      <tr align="center"><td>トータル</td><td>
       <?php for($cont = 1; $cont <= $result['horoscope'][date("Y/m/d")][$_GET['num']]['total']; $cont++){

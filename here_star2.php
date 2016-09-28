@@ -72,6 +72,12 @@
     <h5>
     　 星座のボタンによって星座の方角がわかるよ！
   </h5>
+
+  <label>現在の緯度：</label>
+  <span id="lat"></span><br />
+  <label>現在の経度：</label>
+  <span id="lng"></span>
+
     <ul id ="canSeeStar">
       <li id ="starList">
       </li>
@@ -81,23 +87,46 @@
     <script>
 
     var time = new Date();
-    var fullDate = time.getFullYear()+"-"+time.getMonth()+"-"+time.getDate();
     var Year = time.getFullYear();
     var month = time.getMonth()+1;
     var day = time.getDate();
     var hour = time.getHours();
     var minute = time.getMinutes();
+    var fullDate = Year+"-"+month+"-"+day;
     var lat=0;
     var lng=0;
     var directionNum = 0 ;
     var altitudeNum = 0 ;
     var here = "";
     var latLng = "";
-    var map;
-    var marker;
     var starList = [];
     var seeStarList =[];
+    var locationLat;
+    var locationLng;
+    var map;
+    var panorama;
 
+
+    function review(){
+        console.log("review");
+
+        var positionCell = panorama.getPosition();
+        map.panTo(positionCell);
+
+        lat = positionCell.lat();
+        lng = positionCell.lng();
+        console.log("positionCell 確認");
+        console.log(positionCell.lat());
+        console.log(positionCell.lng());
+        console.log("positionCell 確認終了");
+
+
+        $("#lat").text(lat);
+        $("#lng").text(lng);
+        console.log(lat);
+        console.log(lng);
+        console.log("review out")
+    }
 
     function keyOn(){
       if(window.event.keyCode == 13){
@@ -124,9 +153,22 @@
 
 
     function searchStar(searchId){
-      fullDate = time.getFullYear()+"-"+time.getMonth()+"-"+time.getDate();
-      hour = time.getHours();
-      minute = time.getMinutes();
+
+       Year = time.getFullYear();
+       month = time.getMonth()+1;
+       day = time.getDate();
+       hour = time.getHours();
+       minute = time.getMinutes();
+       fullDate = Year+"-"+month+"-"+day;
+
+
+      console.log("searcStar()");
+      console.log(searchId);
+      console.log(fullDate);
+      console.log(hour);
+      console.log(minute);
+      console.log(lat);
+      console.log(lng);
       $.getJSON('http://linedesign.cloudapp.net/hoshimiru/constellation?',
         {
           lat: lat,
@@ -134,7 +176,8 @@
           date: fullDate,
           hour: hour,
           min: minute,
-          id : searchId
+          id : searchId,
+
         }
       )
       // 結果を取得したら…
@@ -149,21 +192,11 @@
 
     function searchLoad(altitudeNum,directionNum){
       var fenway = {lat: lat, lng: lng};
-      var map = new google.maps.Map(document.getElementById('map'), {
-        center: fenway,
-        zoom: 14
-      });
-      var panorama = new google.maps.StreetViewPanorama(
-          document.getElementById('pano'), {
-            position: fenway,
-            pov: {
-              heading: directionNum,
-              pitch: altitudeNum
 
-            }
-          });
-      map.setStreetView(panorama);
-
+          map.setCenter(fenway);
+          map.setZoom(14);
+          panorama.setPov({heading:directionNum, pitch:altitudeNum, zoom:0});
+          // panorama.setPosition(fenway);
     }
 
 
@@ -176,6 +209,9 @@
       }else{
         $("#errLabel").text("");
       }
+
+
+        console.log($('#location').val());
 
       $.ajax({
         type: 'GET',
@@ -200,15 +236,29 @@
             // 中身が空でなければ、その値を［住所］欄に反映
             seeStarList.length = 0;
             console.log(seeStarList);
+            console.log("doneの中");
+            console.log(lat);
+            console.log(lng);
 
             var element = document.getElementById("starList");
-            element.removeChild(element.childNodes);
+            while( element.firstChild ) {
+              element.removeChild(element.firstChild);
+            }
             for (var i of data.result){
               var star = {id: i.id,name: i.jpName, image: i.starImage,
               altitudeNum: i.altitudeNum,directionNum: i.directionNum}
               seeStarList.push(star);
             }
-            seeStarList.sort(function(a,b){return (a.name > b.name)? 1:-1});
+            seeStarList.sort(function(a, b){
+              a = katakanaToHiragana(a.name);
+              b = katakanaToHiragana(b.name);
+              if(a < b){
+                  return -1;
+              }else if(a > b){
+                  return 1;
+              }
+              return 0;
+          });
             //現在地から見える星座を表示する
             for (var i of seeStarList){
               // var li = document.createElement('li');
@@ -230,22 +280,35 @@
       });
 
 
-      console.log(lat);
-      console.log(lng);
+      console.log("下の緯度: "+lat);
+      console.log("下の経度：　"+lng);
 
     }
 
+
+    function katakanaToHiragana(src) {
+        return src.replace(/[\u30a1-\u30f6]/g, function(match) {
+            var chr = match.charCodeAt(0) - 0x60;
+            return String.fromCharCode(chr);
+        });
+    }
     //リバースジオコーディング
     function reverseGeocoording() {
+
+      console.log("reverseGeocoording in");
+      console.log(locationLat);
+      console.log(locationLng);
       $.ajax({
         type: 'GET',
-        url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+","+lng,
+        url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+locationLat+","+locationLng,
         dataType: 'json',
         success: function(response){ console.log(response);
           $("#location").val(response['results'][2]["formatted_address"]);
         },
         error: function(req, err){ console.log(err); }
       });
+
+      console.log("reverseGeocoording out");
     }
 
 
@@ -260,60 +323,21 @@
         navigator.geolocation.getCurrentPosition(function(position) {
             lat = position.coords.latitude;
             lng = position.coords.longitude;
+            locationLat = position.coords.latitude;
+            locationLng = position.coords.longitude;
             // 緯度経度の取得
             latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-                    //　selectボックスに全星座の名前を入力する
-                    // $.getJSON('http://linedesign.cloudapp.net/hoshimiru/constellation?',
-                    //   {
-                    //     lat: position.coords.latitude,
-                    //     lng: position.coords.longitude,
-                    //     date: fullDate,
-                    //     hour: hour,
-                    //     min: minute,
-                    //     disp: "on"
-                    //   }
-                    // )
-                    // // 結果を取得したら…
-                    // .done(function(data) {
-                    //   // 中身が空でなければ、その値を［住所］欄に反映
-                    //
-                    //   for (var i of data.result){
-                    //     var star = {id: i.id,name: i.jpName, image: i.starImage}
-                    //
-                    //     starList.push(star);
-                    //   }
-                    //
-                    //   //selectに代入
-                    //   for (var i of starList){
-                    //     var select = document.createElement('option');
-                    //
-                    //     select.textContent = i.name;
-                    //     select.value = i.id;
-                    //     document.getElementById('horoscope').appendChild(select);
-                    //   }
-                    //
-                    //   //ランダムな星を５個表示される
-                    //   for (var i of starList){
-                    //     var select = document.createElement('option');
-                    //
-                    //     select.textContent = i.name;
-                    //     select.value = i.id;
-                    //     document.getElementById('horoscope').appendChild(select);
-                    //   }
-                    //
-                    //
-                    //   directionNum = data.result[0].directionNum;
-                    //   altitudeNum = data.result[0].altitudeNum;
-                    //
-                    // });
-
+            console.log(lat);
+            console.log(lng);
+            console.log(fullDate);
+            console.log(hour);
+            console.log(minute);
 
 
                     $.getJSON('http://linedesign.cloudapp.net/hoshimiru/constellation?',
                       {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude,
+                        lat: lat,
+                        lng: lng,
                         date: fullDate,
                         hour: hour,
                         min: minute,
@@ -323,13 +347,23 @@
                     // 結果を取得したら…
                     .done(function(data) {
                       // 中身が空でなければ、その値を［住所］欄に反映
+                      console.log(data);
 
                       for (var i of data.result){
                         var star = {id: i.id,name: i.jpName, image: i.starImage,
                         altitudeNum: i.altitudeNum,directionNum: i.directionNum}
                         seeStarList.push(star);
                       }
-                      seeStarList.sort(function(a,b){return (a.name > b.name)? 1:-1});
+                      seeStarList.sort(function(a, b){
+                        a = katakanaToHiragana(a.name);
+                        b = katakanaToHiragana(b.name);
+                        if(a < b){
+                            return -1;
+                        }else if(a > b){
+                            return 1;
+                        }
+                        return 0;
+                    });
                       //現在地から見える星座を表示する
                       for (var i of seeStarList){
                         // var li = document.createElement('li');
@@ -354,25 +388,35 @@
                 center: latLng,
                 zoom: 17
             });
-              var panorama = new google.maps.StreetViewPanorama(
+            panorama = new google.maps.StreetViewPanorama(
                   document.getElementById('pano'), {
                     position: latLng,
                     pov: {
-                      heading: directionNum,
-                      pitch: altitudeNum
+                      heading: 32,
+                      pitch: 12
                     }
                   });
 
-
             // マーカーの追加
-            marker = new google.maps.Marker({
-                position: latLng,
-                map: map
-            });
+            // new google.maps.Marker({
+            //     position: latLng,
+            //     map: map
+            // });
+            // google.maps.event.addListener(panorama, 'tilesloaded', review);
+            google.maps.event.addListener(panorama, 'position_changed', review);
+
+            map.setStreetView(panorama);
+            console.log("mapの後");
+            console.log(latLng);
+            console.log("latLngを分解")
+            console.log(latLng.lat());
+            console.log(latLng.lng());
+            console.log("分解を終了");
+            console.log(lat);
+            console.log(lng);
         }, function() {
             alert('位置情報取得に失敗しました');
         });
-         map.setStreetView(panorama);
     }
 
 
@@ -382,26 +426,16 @@
 //
 function load(lat, lng) {
   var fenway = {lat: lat, lng: lng};
-  var map = new google.maps.Map(document.getElementById('map'), {
-    center: fenway,
-    zoom: 17
-  });
-  var panorama = new google.maps.StreetViewPanorama(
-      document.getElementById('pano'), {
-        position: fenway,
-        pov: {
-          heading: 34,
-          pitch: 10
-        }
-      });
 
-      marker = new google.maps.Marker({
-          position: fenwey,
-          map: map
-      });
+  map.setCenter(fenway);
+  map.setZoom(17);
+  panorama.setPov({heading:34, pitch:10, zoom:0});
+  panorama.setPosition(fenway);
 
-
-  map.setStreetView(panorama);
+  // new google.maps.Marker({
+  //     position: fenway,
+  //     map: map
+  //     });
 }
 
 

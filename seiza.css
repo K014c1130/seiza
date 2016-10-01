@@ -2,10 +2,9 @@
 body{
 background-image: url("image/star.png");
 background-repeat:repeat;
+color: #ffffff;
 }
-fontcolor.title{
-  color:#ffffff
-}
+
 startitle.title{
 font-size:50px;
 }
@@ -19,3 +18,10 @@ l2.title{
   left:10px;
   color:#ffffff
 }
+
+
+
+a:link { color: #00bfff; }
+a:visited { color: #00bfff; }
+a:hover { color: #ff8c00; }
+a:active { color: #ff8c00; }

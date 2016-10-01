@@ -22,11 +22,12 @@
 <head>
   <?php //cssファイルの読み込み?>
   <link rel="stylesheet" type="text/css" href="seiza.css">
-
+<meta charset="UTF-8">
   <title>星空旅行</title>
 </head>
+
 <body>
-  <fontcolor class="title">
+
 <CENTER>
   <startitle class="title">
     星空旅行
@@ -35,14 +36,11 @@
 </CENTER>
 <br>
 <l1 class="title">
-
-  <a href="direction.php">星座の方角</a><br>
-  <l2 class="title"></l2>今いる位置から星座達がどの方向にいるのか知ることができます。<br>
+<linkcolor class="title">
+  <a href="direction_search.php">星座の方角を検索</a>
+</linkcolor><br>
+  <l2 class="title"></l2>指定位置から見える星座がどの方向にあるのか知ることができます。<br>
   <br>
-
-  <a href="here_star.php">現在の位置から見える星座</a><br>
-  <l2 class="title"></l2>今いる場所から見える星座がわかります。<br>
-    <br>
 
   <a href="detail_star.php">星座の詳細</a><br>
   <l2 class="title"></l2>星座の詳しい情報が見れます。<br>
@@ -55,23 +53,30 @@
     <br>
     <br>
 </l1>
-</fontcolor>
+
 
 <?php
 $ran = rand(0,87);//乱数生成?>
 
-  <div  style=" position:absolute; top:73px; left:500px;">
+  <div  style=" position:absolute; top:83px; left:500px;">
   <FONT color="yellow">
 
 
 <?php
- print "「{$result["result"][$ran]["jpName"]}」（英名:{$result["result"][$ran]["enName"]}）";?>
-
+// 7cfc00 lawngreen
+ print "「{$result["result"][$ran]["jpName"]}」（英名:{$result["result"][$ran]["enName"]}）
+ "
+ ?>
+ </FONT>
+ <FONT color="lawngreen">
+ <?php
+ print "↓画面クリックで詳細表示";
+ ?>
   </FONT>
   </div>
   <br>
 
-  <a href="detail_star_result.php?id=<?echo $ran?>"
+  <a href="detail_star_result.php?id=<?echo $ran?>&flg=<?true?>"
    style="position:absolute; top:100px; left:500px;">
     <img src=<?= $result["result"][$ran]["starImage"]?> alt="ran_seizu" align="center" width="640" height="480">
   </a>

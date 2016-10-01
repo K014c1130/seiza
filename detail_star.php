@@ -2,18 +2,19 @@
   $error="";
   $base_url = 'http://linedesign.cloudapp.net/hoshimiru/constellation';
   $query = ['lat'=>0, 'lng'=>0, 'date'=>'2016-01-01', 'hour'=>0, 'min'=>0, 'disp'=>'on' ];
-  $proxy = array(
-    "http" => array(
-     "proxy" => "tcp://proxy.kmt.neec.ac.jp:8080",
-     'request_fulluri' => true,
-    ),
-  );
-  $proxy_context = stream_context_create($proxy);
+  // $proxy = array(
+  //   "http" => array(
+  //    "proxy" => "tcp://proxy.kmt.neec.ac.jp:8080",
+  //    'request_fulluri' => true,
+  //   ),
+  // );
+  // $proxy_context = stream_context_create($proxy);
   $response = file_get_contents(
                     $base_url.'?' .
                     http_build_query($query),
-                    false,
-                    $proxy_context
+                    false
+                    // ,
+                    // $proxy_context
               );
   $result = json_decode($response,true);
 ?>
@@ -60,7 +61,7 @@ foreach ($seiza_list as $value) {
       <tr>
     <?}?>
     <td width="300" height="35">
-      <a href="http://localhost/seiza/detail_star_result.php?id=<?= $seiza_list[$count]->id?>"><?print $seiza_list[$count]->name;?></td>
+      <a href="detail_star_result.php?id=<?= $seiza_list[$count]->id?>"><?print $seiza_list[$count]->name;?></td>
       <?if($count%8 == 7) {?>
         </tr>
       <?}

@@ -1,19 +1,27 @@
 <?php
+$flg = false;
+
+  if(isset($_GET['flg'])){
+      $flg = $_GET['flg'];
+  }else{
+      $flg = false;
+  }
+
   $error="";
   $base_url = 'http://linedesign.cloudapp.net/hoshimiru/constellation';
   $query = ['lat'=>0, 'lng'=>0, 'date'=>'2016-01-01', 'hour'=>0, 'min'=>0, 'disp'=>'on' ];
-  $proxy = array(
-    "http" => array(
-     "proxy" => "tcp://proxy.kmt.neec.ac.jp:8080",
-     'request_fulluri' => true,
-    ),
-  );
-  $proxy_context = stream_context_create($proxy);
+  // $proxy = array(
+  //   "http" => array(
+  //    "proxy" => "tcp://proxy.kmt.neec.ac.jp:8080",
+  //    'request_fulluri' => true,
+  //   ),
+  // );
+  // $proxy_context = stream_context_create($proxy);
   $response = file_get_contents(
                     $base_url.'?' .
                     http_build_query($query),
-                    false,
-                    $proxy_context
+                    false
+                    // ,$proxy_context
               );
   $result = json_decode($response,true);
 ?>
@@ -47,7 +55,15 @@
 </tr>
 </table>
 <br><br>
-<center><a href="detail_star.php">もどる</a></center>
+<?php
+
+if($flg){ ?>
+  <center><a href="title.php">もどる</a></center>
+<?php }else{ ?>
+  <center><a href="detail_star.php">もどる</a></center>
+<?php }
+ ?>
+
 </body>
 </fontcolor>
 </html>

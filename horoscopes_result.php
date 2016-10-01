@@ -9,17 +9,18 @@
   <body>
     <?php
         $base_url = 'http://api.jugemkey.jp/api/horoscope/free/' . date("Y/m/d");
-        $proxy = array(
-          "http" => array(
-           "proxy" => "tcp://proxy.kmt.neec.ac.jp:8080",
-           'request_fulluri' => true,
-          ),
-        );
-        $proxy_context = stream_context_create($proxy);
+        // $proxy = array(
+        //   "http" => array(
+        //    "proxy" => "tcp://proxy.kmt.neec.ac.jp:8080",
+        //    'request_fulluri' => true,
+        //   ),
+        // );
+        // $proxy_context = stream_context_create($proxy);
         $response = file_get_contents(
                           $base_url,
-                          false,
-                          $proxy_context
+                          false
+                          // ,
+                          // $proxy_context
                     );
         $result = json_decode($response,true);
 

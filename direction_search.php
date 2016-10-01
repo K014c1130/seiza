@@ -49,13 +49,13 @@
 
       #map, #pano {
         float: left;
-        height: 300px;
-        width: 300px;
+        height: 350px;
+        width: 500px;
       }
 
       .view{
-        width: 600px;
-        height: 300px;
+        width: 1000px;
+        height: 450px;
         margin-left: auto;
         margin-right: auto;
 
@@ -65,11 +65,23 @@
         color: #ffffff;
       }
 
+      .selectSiza, .selectTime{
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+
+      .latLngLabel{
+        margin-top: 20px;
+        margin-bottom: 10px;
+        text-align: left
+
+      }
+
     </style>
   </head>
   <body>
     <h1>
-      現在地から見える星座
+      星座の方角
     </h1>
     <p>
     <!-- <form id = 'form' > -->
@@ -80,13 +92,8 @@
       <input type ="button" value = "マップを表示" onClick="getGeocoording();">
       <input id="searchHere" name = "searchHere" type = "button" value = "現在地取得" onClick="getHere();" />
           </li>
-          <p>
 
-          <li>
-      <select id="horoscope" name = "selectStar" >
-        <option value = 0>選択してください</option>
-      </select>
-    </li>
+      <div class = "selectTime">
 
       <li>
       <select id="month" name = "month" onchange="onChange();">
@@ -109,20 +116,30 @@
 
       <input type = "button" name="searchTime" value = "現在時刻を取得" onClick="getTime();">
     </li>
+
+  </div>
+
+
+<div class = "selectSiza">
     <li>
+      <select id="horoscope" name = "selectStar" >
+        <option value = 0>星座を選択してください</option>
+      </select>
       <input type="button" id ="serchHoroscope" name = "selectStar" value="方向を表示" onClick= "searchD($('#horoscope').val());">
     </li>
+  </div>
     </ul>
     </div>
     <!-- </form> -->
 
-<div class="latLngLabel">
-  <label>現在の緯度：</label>
-  <span id="lat"></span><br />
-  <label>現在の経度：</label>
-  <span id="lng"></span>
-</div>
+
     <div class = "view">
+      <div class="latLngLabel">
+        <label>現在の緯度：</label>
+        <span id="lat"></span><br />
+        <label>現在の経度：</label>
+        <span id="lng"></span>
+      </div>
     <span id="map"></span>
     <span id="pano"></span>
   </div>

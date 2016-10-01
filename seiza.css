@@ -1,0 +1,27 @@
+
+body{
+background-image: url("image/star.png");
+background-repeat:repeat;
+color: #ffffff;
+}
+
+startitle.title{
+font-size:50px;
+}
+
+l1.title{
+  text-align: left;
+}
+
+l2.title{
+  position:relative;
+  left:10px;
+  color:#ffffff
+}
+
+
+
+a:link { color: #00bfff; }
+a:visited { color: #00bfff; }
+a:hover { color: #ff8c00; }
+a:active { color: #ff8c00; }
